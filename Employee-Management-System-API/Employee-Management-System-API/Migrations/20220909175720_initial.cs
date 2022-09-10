@@ -47,30 +47,28 @@ namespace Employee_Management_System_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Person",
+                name: "Employees",
                 columns: table => new
                 {
-                    PersonId = table.Column<int>(type: "int", nullable: false)
+                    EmployeeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeNumber = table.Column<int>(type: "int", nullable: false),
+                    EmployeeNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Salary = table.Column<double>(type: "float", nullable: false),
                     Position = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmployeeId = table.Column<int>(type: "int", nullable: true),
-                    ReportingLineManagerId = table.Column<int>(type: "int", nullable: true),
-                    ReportingLineManagerId1 = table.Column<int>(type: "int", nullable: true)
+                    ReportingLineManagerId = table.Column<int>(type: "int", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.PersonId);
+                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                     table.ForeignKey(
-                        name: "FK_Person_Person_ReportingLineManagerId",
+                        name: "FK_Employees_Employees_ReportingLineManagerId",
                         column: x => x.ReportingLineManagerId,
-                        principalTable: "Person",
-                        principalColumn: "PersonId",
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -220,8 +218,8 @@ namespace Employee_Management_System_API.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Person_ReportingLineManagerId",
-                table: "Person",
+                name: "IX_Employees_ReportingLineManagerId",
+                table: "Employees",
                 column: "ReportingLineManagerId");
         }
 
@@ -243,7 +241,7 @@ namespace Employee_Management_System_API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Employee_Management_System_API.Models.Entities
 {
-    public class ReportingLineManager:Person
+    public class ReportingLineManager:Employee
     {
-        public int ReportingLineManagerId { get; set; }
+        public new int ReportingLineManagerId { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
     }
 }

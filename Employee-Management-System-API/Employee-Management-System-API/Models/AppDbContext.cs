@@ -23,14 +23,13 @@ namespace Employee_Management_System_API.Models
             base.OnModelCreating(builder);
 
             builder.Entity<Employee>()
-                .HasBaseType<Person>()
                 .HasOne("ReportingLineManager")
                 .WithMany("Employees")
                 .HasForeignKey("ReportingLineManagerId")
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ReportingLineManager>()
-                .HasBaseType<Person>()
+                .HasBaseType<Employee>()
                 .HasMany("Employees")
                 .WithOne("ReportingLineManager")
                 .OnDelete(DeleteBehavior.Restrict);

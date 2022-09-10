@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Employee_Management_System_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220909164018_initial")]
+    [Migration("20220909175720_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace Employee_Management_System_API.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Person", b =>
+            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Employee", b =>
                 {
-                    b.Property<int>("PersonId")
+                    b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -35,8 +35,8 @@ namespace Employee_Management_System_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EmployeeNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("EmployeeNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -44,17 +44,22 @@ namespace Employee_Management_System_API.Migrations
                     b.Property<string>("Position")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ReportingLineManagerId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Salary")
                         .HasColumnType("float");
 
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PersonId");
+                    b.HasKey("EmployeeId");
 
-                    b.ToTable("Person");
+                    b.HasIndex("ReportingLineManagerId");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Person");
+                    b.ToTable("Employees");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Employee");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -253,30 +258,22 @@ namespace Employee_Management_System_API.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Employee", b =>
-                {
-                    b.HasBaseType("Employee_Management_System_API.Models.Entities.Person");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReportingLineManagerId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("ReportingLineManagerId");
-
-                    b.HasDiscriminator().HasValue("Employee");
-                });
-
             modelBuilder.Entity("Employee_Management_System_API.Models.Entities.ReportingLineManager", b =>
                 {
-                    b.HasBaseType("Employee_Management_System_API.Models.Entities.Person");
-
-                    b.Property<int>("ReportingLineManagerId")
-                        .HasColumnType("int")
-                        .HasColumnName("ReportingLineManagerId1");
+                    b.HasBaseType("Employee_Management_System_API.Models.Entities.Employee");
 
                     b.HasDiscriminator().HasValue("ReportingLineManager");
+                });
+
+            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Employee", b =>
+                {
+                    b.HasOne("Employee_Management_System_API.Models.Entities.ReportingLineManager", "ReportingLineManager")
+                        .WithMany("Employees")
+                        .HasForeignKey("ReportingLineManagerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ReportingLineManager");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -328,17 +325,6 @@ namespace Employee_Management_System_API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Employee", b =>
-                {
-                    b.HasOne("Employee_Management_System_API.Models.Entities.ReportingLineManager", "ReportingLineManager")
-                        .WithMany("Employees")
-                        .HasForeignKey("ReportingLineManagerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("ReportingLineManager");
                 });
 
             modelBuilder.Entity("Employee_Management_System_API.Models.Entities.ReportingLineManager", b =>
