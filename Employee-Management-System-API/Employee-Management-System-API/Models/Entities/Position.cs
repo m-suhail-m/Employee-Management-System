@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace Employee_Management_System_API.Models.Entities
 {
-    public class ReportingLineManager:Employee
+    public class Position
     {
-        public new int ReportingLineManagerId { get; set; }
+        public int PositionId { get; set; }
+        public string PositionName { get; set; }
+        public string PositionDescription { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
     }
 }

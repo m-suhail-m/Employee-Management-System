@@ -13,9 +13,14 @@ namespace Employee_Management_System_API.Models.Entities
         public string Surname { get; set; }
         public DateTime BirthDate { get; set; }
         public double Salary { get; set; }
-        public string Position { get; set; }
+        public int PositionId { get; set; }
+        public virtual Position Position { get; set; }
+        public int DepartmentId { get; set; }
+        public virtual Department Department { get; set; }
         public int ReportingLineManagerId { get; set; }
-        public virtual ReportingLineManager ReportingLineManager { get; set; }
+        public virtual Employee ReportingLineManager { get; set; }
+
+       
 
         
     }

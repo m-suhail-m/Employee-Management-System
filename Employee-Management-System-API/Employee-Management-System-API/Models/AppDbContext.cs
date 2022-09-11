@@ -16,25 +16,46 @@ namespace Employee_Management_System_API.Models
         }
 
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<ReportingLineManager> ReportingLineManagers { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Position> Positions { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<Employee>()
-                .HasOne("ReportingLineManager")
-                .WithMany("Employees")
-                .HasForeignKey("ReportingLineManagerId")
-                .OnDelete(DeleteBehavior.Restrict);
+                 .HasOne(d=>d.Department)
+                 .WithMany()
+                 .HasForeignKey(d=>d.DepartmentId);
 
-            builder.Entity<ReportingLineManager>()
-                .HasBaseType<Employee>()
-                .HasMany("Employees")
-                .WithOne("ReportingLineManager")
-                .OnDelete(DeleteBehavior.Restrict);
-                
+            builder.Entity<Employee>()
+                 .HasOne(p=>p.Position)
+                 .WithMany()
+                 .HasForeignKey(p=> p.PositionId);
+
+            builder.Entity<Employee>()
+                 .HasOne(l=> l.ReportingLineManager)
+                 .WithOne()
+                 .IsRequired(false);
+
+            //builder.Entity<Department>()
+            //    .HasOne("HeadOfDepartment")
+            //    .WithOne("Department")
+            //    .HasForeignKey("HeadOfDepartmentId");
+
+            builder.Entity<Department>()
+                .HasMany(e=> e.Employees)
+                .WithOne();
+
+            builder.Entity<Position>()
+                .HasMany(e=> e.Employees)
+                .WithOne();
            
+                
+
+
+
         }
     }
 }

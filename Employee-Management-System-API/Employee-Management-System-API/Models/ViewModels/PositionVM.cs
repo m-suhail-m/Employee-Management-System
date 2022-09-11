@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace Employee_Management_System_API.Models.ViewModels
 {
-    public class ReportingLineManagerVM
+    public class PositionVM
     {
+        public string PositionName { get; set; }
+        public string PositionDescription { get; set; }
     }
 }

@@ -1,0 +1,23 @@
+
+<form #empForm [formGroup]="employeeForm" (ngSubmit)="AddEmployee(name.value, surname.value, birth.value, salary.value, position.value, manager.value)">
+
+    <label for="name">Name</label>
+    <input type="text" name="name" formControlName="name" #name><br>
+    
+    <label for="surname">Surname</label>
+    <input type="text" name="surname" formControlName="surname" #surname><br>
+    
+    <label for="birthdate">Birth Date</label>
+    <input type="date" name="birthdate" formControlName="birthDate" #birth><br>
+    
+    <label for="salary">Salary</label>
+    <input type="number" name="salary" formControlName="salary" #salary><br>
+    
+    <label for="position">Position</label>
+    <input type="text" name="position" formControlName="position" #position><br>
+    
+    <label for="reportingLineManager">Reporting Line Manager Id</label>
+    <input type="number" name="reportingLineManager" formControlName="reportingLineManagerId" #manager><br>
+    
+    <button type="submit" [disabled]="!employeeForm.valid">Add Employee</button>
+</form>

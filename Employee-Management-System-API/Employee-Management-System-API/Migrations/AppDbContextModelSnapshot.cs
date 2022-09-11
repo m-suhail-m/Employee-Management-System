@@ -19,6 +19,27 @@ namespace Employee_Management_System_API.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Department", b =>
+                {
+                    b.Property<int>("DepartmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DepartmentDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HeadOfDepartmentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DepartmentId");
+
+                    b.ToTable("Departments");
+                });
+
             modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Employee", b =>
                 {
                     b.Property<int>("EmployeeId")
@@ -29,9 +50,11 @@ namespace Employee_Management_System_API.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DepartmentId1")
+                        .HasColumnType("int");
 
                     b.Property<string>("EmployeeNumber")
                         .HasColumnType("nvarchar(max)");
@@ -39,8 +62,11 @@ namespace Employee_Management_System_API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PositionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PositionId1")
+                        .HasColumnType("int");
 
                     b.Property<int>("ReportingLineManagerId")
                         .HasColumnType("int");
@@ -53,11 +79,36 @@ namespace Employee_Management_System_API.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.HasIndex("ReportingLineManagerId");
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("DepartmentId1");
+
+                    b.HasIndex("PositionId");
+
+                    b.HasIndex("PositionId1");
+
+                    b.HasIndex("ReportingLineManagerId")
+                        .IsUnique();
 
                     b.ToTable("Employees");
+                });
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Employee");
+            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Position", b =>
+                {
+                    b.Property<int>("PositionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PositionDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PositionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PositionId");
+
+                    b.ToTable("Positions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -256,20 +307,35 @@ namespace Employee_Management_System_API.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.ReportingLineManager", b =>
-                {
-                    b.HasBaseType("Employee_Management_System_API.Models.Entities.Employee");
-
-                    b.HasDiscriminator().HasValue("ReportingLineManager");
-                });
-
             modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Employee", b =>
                 {
-                    b.HasOne("Employee_Management_System_API.Models.Entities.ReportingLineManager", "ReportingLineManager")
-                        .WithMany("Employees")
-                        .HasForeignKey("ReportingLineManagerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("Employee_Management_System_API.Models.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Employee_Management_System_API.Models.Entities.Department", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("DepartmentId1");
+
+                    b.HasOne("Employee_Management_System_API.Models.Entities.Position", "Position")
+                        .WithMany()
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Employee_Management_System_API.Models.Entities.Position", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("PositionId1");
+
+                    b.HasOne("Employee_Management_System_API.Models.Entities.Employee", "ReportingLineManager")
+                        .WithOne()
+                        .HasForeignKey("Employee_Management_System_API.Models.Entities.Employee", "ReportingLineManagerId");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Position");
 
                     b.Navigation("ReportingLineManager");
                 });
@@ -325,7 +391,12 @@ namespace Employee_Management_System_API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.ReportingLineManager", b =>
+            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Department", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Position", b =>
                 {
                     b.Navigation("Employees");
                 });

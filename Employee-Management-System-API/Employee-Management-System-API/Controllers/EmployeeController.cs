@@ -50,30 +50,20 @@ namespace Employee_Management_System_API.Controllers
                 Surname = employeeVM.Surname,
                 BirthDate = employeeVM.BirthDate,
                 Salary = employeeVM.Salary,
-                Position = employeeVM.Position
+                PositionId = employeeVM.PositionId,
+                DepartmentId = employeeVM.DepartmentId
                 //EmployeeNumber = _repository.GenerateEmployeeNumber(employeeVM.EmployeeId, employeeVM.BirthDate)
-                
+
             };
 
-            if (employeeVM.ReportingLineManagerId != 0)
-            {
-                newEmployee.ReportingLineManagerId = employeeVM.ReportingLineManagerId;
-                _repository.Add(newEmployee);
-                newEmployee.EmployeeNumber = _repository.GenerateEmployeeNumber(newEmployee.EmployeeId, newEmployee.BirthDate);
-            }
-
-            else
-            {
-                Employee reportingLineManager = new ReportingLineManager();
-                reportingLineManager = newEmployee;
-                _repository.Add(reportingLineManager);
-                reportingLineManager.EmployeeNumber = _repository.GenerateEmployeeNumber(newEmployee.EmployeeId, newEmployee.BirthDate);
-
-            }
 
             try
             {
+                _repository.Add(newEmployee);
                 await _repository.SaveAllChangesAsync();
+
+                newEmployee.EmployeeNumber = _repository.GenerateEmployeeNumber(newEmployee.EmployeeId, newEmployee.BirthDate);
+
                 return NoContent();
             }
             catch (Exception e)
