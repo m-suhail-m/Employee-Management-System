@@ -43,6 +43,7 @@ namespace Employee_Management_System_API.Controllers
         [Route("AddEmployee")]
         public async Task<IActionResult> AddEmployee(EmployeeVM employeeVM)
         {
+            
 
             var newEmployee = new Employee
             {
@@ -50,11 +51,18 @@ namespace Employee_Management_System_API.Controllers
                 Surname = employeeVM.Surname,
                 BirthDate = employeeVM.BirthDate,
                 Salary = employeeVM.Salary,
-                PositionId = employeeVM.PositionId,
-                DepartmentId = employeeVM.DepartmentId
-                //EmployeeNumber = _repository.GenerateEmployeeNumber(employeeVM.EmployeeId, employeeVM.BirthDate)
-
+                PositionId = employeeVM.PositionId
             };
+
+            if (employeeVM.DepartmentId != 0)
+            {
+                newEmployee.DepartmentId = employeeVM.DepartmentId;
+            }
+
+            if (employeeVM.ReportingLineManagerId != 0)
+            {
+                newEmployee.ReportingLineManagerId = employeeVM.ReportingLineManagerId;
+            }
 
 
             try
@@ -63,6 +71,7 @@ namespace Employee_Management_System_API.Controllers
                 await _repository.SaveAllChangesAsync();
 
                 newEmployee.EmployeeNumber = _repository.GenerateEmployeeNumber(newEmployee.EmployeeId, newEmployee.BirthDate);
+                await _repository.SaveAllChangesAsync();
 
                 return NoContent();
             }

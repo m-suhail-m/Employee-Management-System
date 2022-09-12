@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Employee_Management_System_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220911184454_initial")]
+    [Migration("20220912181939_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,10 +52,7 @@ namespace Employee_Management_System_API.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DepartmentId1")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("EmployeeNumber")
@@ -70,7 +67,7 @@ namespace Employee_Management_System_API.Migrations
                     b.Property<int?>("PositionId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReportingLineManagerId")
+                    b.Property<int?>("ReportingLineManagerId")
                         .HasColumnType("int");
 
                     b.Property<double>("Salary")
@@ -83,14 +80,13 @@ namespace Employee_Management_System_API.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasIndex("DepartmentId1");
-
                     b.HasIndex("PositionId");
 
                     b.HasIndex("PositionId1");
 
                     b.HasIndex("ReportingLineManagerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ReportingLineManagerId] IS NOT NULL");
 
                     b.ToTable("Employees");
                 });
@@ -312,14 +308,8 @@ namespace Employee_Management_System_API.Migrations
             modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Employee", b =>
                 {
                     b.HasOne("Employee_Management_System_API.Models.Entities.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Employee_Management_System_API.Models.Entities.Department", null)
                         .WithMany("Employees")
-                        .HasForeignKey("DepartmentId1");
+                        .HasForeignKey("DepartmentId");
 
                     b.HasOne("Employee_Management_System_API.Models.Entities.Position", "Position")
                         .WithMany()

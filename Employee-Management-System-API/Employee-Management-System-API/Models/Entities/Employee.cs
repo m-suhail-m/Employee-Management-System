@@ -15,9 +15,9 @@ namespace Employee_Management_System_API.Models.Entities
         public double Salary { get; set; }
         public int PositionId { get; set; }
         public virtual Position Position { get; set; }
-        public int DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
         public virtual Department Department { get; set; }
-        public int ReportingLineManagerId { get; set; }
+        public int? ReportingLineManagerId { get; set; }
         public virtual Employee ReportingLineManager { get; set; }
 
        

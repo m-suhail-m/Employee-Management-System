@@ -22,12 +22,13 @@ namespace Employee_Management_System_API.Models
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
+           
 
             builder.Entity<Employee>()
-                 .HasOne(d=>d.Department)
-                 .WithMany()
-                 .HasForeignKey(d=>d.DepartmentId);
+                 .HasOne(d => d.Department)
+                 .WithMany(e=> e.Employees)
+                 .HasForeignKey(d=>d.DepartmentId)
+                 .IsRequired(false);
 
             builder.Entity<Employee>()
                  .HasOne(p=>p.Position)
@@ -44,16 +45,17 @@ namespace Employee_Management_System_API.Models
             //    .WithOne("Department")
             //    .HasForeignKey("HeadOfDepartmentId");
 
-            builder.Entity<Department>()
-                .HasMany(e=> e.Employees)
-                .WithOne();
+            //builder.Entity<Department>()
+            //    .HasMany(e => e.Employees)
+            //    .WithOne()
+            //    .IsRequired(false);
 
             builder.Entity<Position>()
                 .HasMany(e=> e.Employees)
                 .WithOne();
-           
-                
 
+
+            base.OnModelCreating(builder);
 
 
         }

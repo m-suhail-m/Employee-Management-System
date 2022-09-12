@@ -193,9 +193,8 @@ namespace Employee_Management_System_API.Migrations
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Salary = table.Column<double>(type: "float", nullable: false),
                     PositionId = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
-                    ReportingLineManagerId = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId1 = table.Column<int>(type: "int", nullable: true),
+                    DepartmentId = table.Column<int>(type: "int", nullable: true),
+                    ReportingLineManagerId = table.Column<int>(type: "int", nullable: true),
                     PositionId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -204,12 +203,6 @@ namespace Employee_Management_System_API.Migrations
                     table.ForeignKey(
                         name: "FK_Employees_Departments_DepartmentId",
                         column: x => x.DepartmentId,
-                        principalTable: "Departments",
-                        principalColumn: "DepartmentId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Employees_Departments_DepartmentId1",
-                        column: x => x.DepartmentId1,
                         principalTable: "Departments",
                         principalColumn: "DepartmentId",
                         onDelete: ReferentialAction.Restrict);
@@ -278,11 +271,6 @@ namespace Employee_Management_System_API.Migrations
                 column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_DepartmentId1",
-                table: "Employees",
-                column: "DepartmentId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Employees_PositionId",
                 table: "Employees",
                 column: "PositionId");
@@ -296,7 +284,8 @@ namespace Employee_Management_System_API.Migrations
                 name: "IX_Employees_ReportingLineManagerId",
                 table: "Employees",
                 column: "ReportingLineManagerId",
-                unique: true);
+                unique: true,
+                filter: "[ReportingLineManagerId] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

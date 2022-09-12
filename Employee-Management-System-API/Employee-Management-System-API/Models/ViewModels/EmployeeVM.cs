@@ -14,5 +14,6 @@ namespace Employee_Management_System_API.Models.ViewModels
         public double Salary { get; set; }
         public int PositionId { get; set; }
         public int DepartmentId { get; set; }
+        public int ReportingLineManagerId { get; set; }
     }
 }

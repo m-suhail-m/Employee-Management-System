@@ -35,7 +35,7 @@ namespace Employee_Management_System_API.Models
         //Employee
         public async Task<Employee[]> GetAllEmployeesAsync()
         {
-            IQueryable<Employee> employees = _appDbContext.Employees.Include(x=>x.Department.DepartmentId).Include(x=>x.Department.DepartmentName).Include(x=>x.Position.PositionId).Include(x=>x.Position.PositionName);
+            IQueryable<Employee> employees = _appDbContext.Employees.Include(x=>x.Department).Include(x=>x.Department).Include(x=>x.Position).Include(x=>x.Position);
             return await employees.ToArrayAsync();
         }
         public async Task<Employee[]> SearchEmployeesByStringFieldsAsync(string query)
@@ -49,10 +49,6 @@ namespace Employee_Management_System_API.Models
             return await employee.FirstOrDefaultAsync();
         }
 
-
-        //Department
-
-        //Position
         public string GenerateEmployeeNumber(int id, DateTime birthdate)
         {
             string monthComponent ="";
@@ -77,7 +73,22 @@ namespace Employee_Management_System_API.Models
             }
             string idNumber = idComponent + yearComponent + monthComponent;
 
-            return idNumber;
+            return  idNumber;
         }
+
+        //Position
+        public async Task<Position[]> GetAllPositionsAsync()
+        {
+            IQueryable<Position> positions = _appDbContext.Positions;
+            return await positions.ToArrayAsync();
+        }
+
+        //Department
+        public async Task<Department[]> GetAllDepartmentsAsync()
+        {
+            IQueryable<Department> departments = _appDbContext.Departments;
+            return await departments.ToArrayAsync();
+        }
+
     }
 }
