@@ -1,0 +1,15 @@
+<div id="main">
+    <form [formGroup]="positionForm" (ngSubmit)="AddPosition()">
+
+        <label for="name">Position Name</label><br>
+        <input type="text" name="name" formControlName="positionName"><br>
+        <div id="errorMessage" *ngIf="positionName!.invalid && (positionName!.dirty || positionName!.touched)">A name is required</div>
+        
+        <label for="description">Position Description</label><br>
+        <input type="text" name="description" formControlName="positionDescription"><br>
+        <div id="errorMessage" *ngIf="positionDescription!.invalid && (positionDescription!.dirty || positionDescription!.touched)">A description is required</div>
+    
+        
+        <button id="buttonAdd" type="submit" [disabled]="!positionForm.valid">Add Position</button>
+    </form>
+</div>

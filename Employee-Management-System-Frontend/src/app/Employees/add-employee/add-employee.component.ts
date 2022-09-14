@@ -10,9 +10,12 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.css']
 })
+
 export class AddEmployeeComponent implements OnInit {
 
   constructor(private httpClient:HttpClient, private httpService:HttpService, private fb:FormBuilder) { }
+
+  
 
   ngOnInit(): void {
     this.GetEmployees().subscribe(res=>{
@@ -21,36 +24,45 @@ export class AddEmployeeComponent implements OnInit {
     },()=>{
       this.httpService.FetchError()
     })
+
+    this.today = Date.now()
   }
+
+ today = 0
 
   employeeForm = this.fb.group({
     name:['', [Validators.required]],
     surname:['',[Validators.required]],
-    birthDate:['',[Validators.required,]],
-    salary:['',[Validators.required, Validators.min(0)]],
-    position:['',[Validators.required]],
-    reportingLineManagerId:['']
+    birthDate:['',[Validators.required]],
+    salary:[0,[Validators.required, Validators.min(1)]],
+    position:[0,[Validators.required, Validators.min(1)]],
+    department:[0],
+    reportingLineManagerId:[0]
   })
 
-  // AddEmployee(){
-  //   this.httpClient.post("")
-  // }
+  
+  get name(){return this.employeeForm.get('name')}
+  get surname(){return this.employeeForm.get('surname')}
+  get birthDate(){return this.employeeForm.get('birthDate')}
+  get salary(){return this.employeeForm.get('salary')}
+  get position(){return this.employeeForm.get('position')}
 
   employees:Employee[] =[]
-  formValue=''
 
   GetEmployees():Observable<Employee[]>{
     return this.httpClient.get<Employee[]>(this.httpService.httpLink + 'Employee/GetAllEmployees')
   }
   
-  AddEmployee(name:string, surname:string, birth:string, salary:string, position:string, reportingLineManagerId:string){
+  AddEmployee(){
+   const employeeForm = this.employeeForm.value
     let employee={
-      name:name,
-      surname:surname,
-      birthDate: birth,
-      salary: parseFloat(salary) ,
-      position:position,
-      reportingLineManagerId: parseInt(reportingLineManagerId)
+      name:employeeForm.name,
+      surname:employeeForm.surname,
+      birthDate: employeeForm.birthDate,
+      salary: parseFloat(employeeForm.salary),
+      positionId: employeeForm.position*1,
+      departmentId: employeeForm.department*1,
+      reportingLineManagerId: employeeForm.reportingLineManagerId*1
     }
 
     this.httpClient.post(this.httpService.httpLink + 'Employee/AddEmployee', employee).subscribe(isGood=>{
@@ -62,4 +74,5 @@ export class AddEmployeeComponent implements OnInit {
 
 }
 
-// 
+// name:string, surname:string, birth:string, salary:string, position:string, reportingLineManagerId:string
+//name.value, surname.value, birth.value, salary.value, position.value, manager.value

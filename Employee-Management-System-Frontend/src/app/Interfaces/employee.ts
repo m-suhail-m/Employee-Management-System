@@ -1,4 +1,6 @@
-import { ReportingLineManager } from "./reporting-line-manager"
+import { Department } from "./department"
+import { Position } from "./position"
+
 
 export interface Employee {
     employeeId: number
@@ -7,8 +9,11 @@ export interface Employee {
     surname:string
     birthDate:Date
     salary:number
-    position:string
+    positionId:number
+    position: Position
+    departmentId:number
+    department:Department
     reportingLineManagerId:number
-    reportingLineManager:ReportingLineManager
+
 
 }

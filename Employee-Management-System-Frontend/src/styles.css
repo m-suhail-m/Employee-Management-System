@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+#errorMessage{
+    color: red;
+    font-size:smaller;
+}
+
+#main{
+    /* align-items: center; */
+    justify-content: center;
+    /* position: relative; */
+    display: flex;
+    background-color: antiquewhite;
+}
+
+input{
+    border-radius: 5px;
+    border-width: 1px 1px 1px 1px;
+    
+}
+
+input:focus{
+
+    outline-color:deepskyblue;
+    box-shadow: none;
+    box-shadow: 3px 3px 5px 3px lightskyblue;
+}
+
+button{
+    border-radius: 5px;
+    border-color: aliceblue;
+    color: rgb(231, 231, 231);
+}
+
+button:valid{
+    cursor: pointer;
+}
+
+button:disabled{
+    cursor: not-allowed;
+}
+
+#buttonAdd{
+    background-color: rgb(31, 143, 255);
+    /* border-color: rgb(0, 185, 247); */
+    
+}

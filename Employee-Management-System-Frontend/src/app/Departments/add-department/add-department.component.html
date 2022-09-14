@@ -1,0 +1,20 @@
+<div id="main">
+    <form [formGroup]="departmentForm" (ngSubmit)="AddDepartment()">
+
+        <label for="name">Department Name</label><br>
+        <input type="text" name="name" formControlName="departmentName"><br>
+        <div id="errorMessage" *ngIf="departmentName!.invalid && (departmentName!.dirty || departmentName!.touched)">A name is required</div>
+        
+        <label for="description">Department Description</label><br>
+        <input type="text" name="description" formControlName="departmentDescription"><br>
+        <div id="errorMessage" *ngIf="departmentDescription!.invalid && (departmentDescription!.dirty || departmentDescription!.touched)">A description is required</div>
+    
+        <label for="hod">Head of Department</label><br>
+        <select name="hod">
+            <option selected disabled>Select a head of department</option>
+            <option></option>
+        </select><br>
+    
+        <button type="submit" [disabled]="!departmentForm.valid">Add Department</button>
+    </form>
+</div>
