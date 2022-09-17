@@ -9,7 +9,23 @@
         <input type="text" name="description" formControlName="positionDescription"><br>
         <div id="errorMessage" *ngIf="positionDescription!.invalid && (positionDescription!.dirty || positionDescription!.touched)">A description is required</div>
     
+        <!-- <label for="hasDepartment">Belongs to a department?</label><br>
+        <select name="hasDepartment" formControlName="hasDepartment">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <div id="errorMessage" *ngIf="hasDepartment!.invalid && (hasDepartment!.dirty || hasDepartment!.touched)">Please indicate if an employee in this postion belongs to a department</div>
         
+        <br>
+
+        <label for="hasReportingLineManager">Has a reporting line manager?</label><br>
+        <select name="hasReportingLineManager" formControlName="hasReportingLineManager">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <div id="errorMessage" *ngIf="hasReportingLineManager!.invalid && (hasReportingLineManager!.dirty || hasReportingLineManager!.touched)">Please indicate if an employee in this postion has a reporting line manager</div>
+        <br> -->
+
         <button id="buttonAdd" type="submit" [disabled]="!positionForm.valid">Add Position</button>
     </form>
 </div>

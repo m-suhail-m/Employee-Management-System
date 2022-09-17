@@ -1,0 +1,18 @@
+#searchBar{
+    margin-left: 210px;
+    box-shadow: none;
+    margin-bottom: 10px;
+}
+
+#searchButton{
+    margin-left: 210px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+
+}
+
+#searchButton, #addButton{
+    background-color: rgb(100, 159, 237);
+    color: aliceblue;
+    border-color: black;
+}

@@ -12,8 +12,9 @@ export interface Employee {
     positionId:number
     position: Position
     departmentId:number
-    department:Department
+    department?:Department
     reportingLineManagerId:number
+    reportingLineManager?:Employee
 
 
 }

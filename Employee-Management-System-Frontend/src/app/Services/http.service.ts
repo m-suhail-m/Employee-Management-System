@@ -8,9 +8,11 @@ export class HttpService {
 
   constructor() { }
 
-  httpLink:string = 'https://localhost:44357/api/'
+  httpLink:string = 'https://employeemanagement.com/aai/'
 
   FetchError(){
     alert("An error occurred while trying to fetch the data")
   }
+
+
 }

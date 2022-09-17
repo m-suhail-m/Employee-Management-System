@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { position } from 'html2canvas/dist/types/css/property-descriptors/position';
 import { HttpService } from 'src/app/Services/http.service';
 
 @Component({
@@ -19,6 +20,9 @@ export class AddPositionComponent implements OnInit {
   positionForm = this.fb.group({
     positionName:['', Validators.required],
     positionDescription:['', Validators.required]
+    //,
+    // hasDepartment:['', Validators.required],
+    // hasReportingLineManager:['', Validators.required]
   })
 
   AddPosition(){
@@ -27,6 +31,9 @@ export class AddPositionComponent implements OnInit {
     let position={
       positionName: positionForm.positionName,
       positionDescription: positionForm.positionDescription
+      //,
+      // hasDepartment: positionForm.hasDepartment,
+      // hasReportingLineManager: positionForm.hasReportingLineManager
     }
     this.httpClient.post(this.httpService.httpLink + 'Position/AddPosition' , position).subscribe(()=>{
       alert("Position Added Successfully")
@@ -37,5 +44,7 @@ export class AddPositionComponent implements OnInit {
 
   get positionName(){return this.positionForm.get('positionName')}
   get positionDescription(){return this.positionForm.get('positionDescription')}
+  // get hasDepartment(){return this.positionForm.get('hasDepartment')}
+  // get hasReportingLineManager(){return this.positionForm.get('hasReportingLineManager')}
 
 }

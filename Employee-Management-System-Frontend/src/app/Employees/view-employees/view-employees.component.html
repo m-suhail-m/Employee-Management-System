@@ -1,0 +1,37 @@
+<h1>View Employees</h1>
+<input #searchBar type="text" id="searchBar" placeholder="Search..."><br>
+<button id ="searchButton" (click)="Search(searchBar.value)">Search</button>
+<button id="addButton" [routerLink]="'/add-employee'" >Add Employee</button>
+<div id ="main">
+
+    
+    
+    <table>
+        <tr>
+            <th (click)="SortByEmpNumber()">Employee Number</th>
+            <th (click)="SortByName()">Name</th>
+            <th (click)="SortBySurname()">Surname</th>
+            <th (click)="SortByDateOfBirth()">Date of birth</th>
+            <th (click)="SortBySalary()">Salary</th>
+            <th (click)="SortByPosition()">Position</th>
+            <th (click)="SortByDepartment()">Department</th>
+            <th (click)="SortByReportingLineManager()">Reporting Line Manager</th>
+            <th></th>
+            <th></th>
+        </tr>
+        
+        <tr *ngFor="let employee of employees">
+            <td>{{employee.employeeNumber}}</td>
+            <td>{{employee.name}}</td>
+            <td>{{employee.surname}}</td>
+            <td>{{employee.birthDate | date:'shortDate'}}</td>
+            <td>{{employee.salary}}</td>
+            <td>{{employee.position.positionName}}</td>
+            <td>{{employee.department?.departmentName}}</td>
+            <td>{{employee.reportingLineManager?.name}} {{employee.reportingLineManager?.surname}}</td>
+            <td><button id="update" [routerLink]="['/update-employee', employee.employeeId]"></button></td>
+            <td><button id="delete" (click)="Delete(employee.employeeId)"></button></td>
+        </tr>
+    </table>
+</div>
+

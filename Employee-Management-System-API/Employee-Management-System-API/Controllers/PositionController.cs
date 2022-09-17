@@ -45,7 +45,9 @@ namespace Employee_Management_System_API.Controllers
             Position newPosition = new Position
             {
                 PositionName = positionVM.PositionName,
-                PositionDescription = positionVM.PositionDescription
+                PositionDescription = positionVM.PositionDescription,
+                HasDepartment = true,
+                HasReportingLineManager = true
             };
 
             try
@@ -65,6 +67,35 @@ namespace Employee_Management_System_API.Controllers
             {
 
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
+            }
+        }
+
+        [HttpDelete("DeletePosition/{id}")]
+        public async Task<IActionResult> DeletePosition(int id)
+        {
+            Position position = await _repository.GetPositionById(id);
+            if (position == null) return NotFound();
+            if (position.PositionId == 1 || position.PositionId == 2 || position.PositionId == 3 || position.PositionId == 4) return Forbid();
+            
+
+            try
+            {
+                _repository.Delete(position);
+            }
+            catch (Exception e)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
+            }
+
+            if (await _repository.SaveAllChangesAsync())
+            {
+                return NoContent();
+            }
+
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

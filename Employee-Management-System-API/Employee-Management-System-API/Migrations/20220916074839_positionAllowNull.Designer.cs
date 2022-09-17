@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Employee_Management_System_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220912181939_initial")]
-    partial class initial
+    [Migration("20220916074839_positionAllowNull")]
+    partial class positionAllowNull
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,10 +61,7 @@ namespace Employee_Management_System_API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PositionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PositionId1")
+                    b.Property<int?>("PositionId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ReportingLineManagerId")
@@ -82,11 +79,7 @@ namespace Employee_Management_System_API.Migrations
 
                     b.HasIndex("PositionId");
 
-                    b.HasIndex("PositionId1");
-
-                    b.HasIndex("ReportingLineManagerId")
-                        .IsUnique()
-                        .HasFilter("[ReportingLineManagerId] IS NOT NULL");
+                    b.HasIndex("ReportingLineManagerId");
 
                     b.ToTable("Employees");
                 });
@@ -97,6 +90,12 @@ namespace Employee_Management_System_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("HasDepartment")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasReportingLineManager")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PositionDescription")
                         .HasColumnType("nvarchar(max)");
@@ -312,18 +311,13 @@ namespace Employee_Management_System_API.Migrations
                         .HasForeignKey("DepartmentId");
 
                     b.HasOne("Employee_Management_System_API.Models.Entities.Position", "Position")
-                        .WithMany()
-                        .HasForeignKey("PositionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Employee_Management_System_API.Models.Entities.Position", null)
                         .WithMany("Employees")
-                        .HasForeignKey("PositionId1");
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Employee_Management_System_API.Models.Entities.Employee", "ReportingLineManager")
-                        .WithOne()
-                        .HasForeignKey("Employee_Management_System_API.Models.Entities.Employee", "ReportingLineManagerId");
+                        .WithMany()
+                        .HasForeignKey("ReportingLineManagerId");
 
                     b.Navigation("Department");
 

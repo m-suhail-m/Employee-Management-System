@@ -5,5 +5,6 @@ export interface Department {
     departmentName:string
     departmentDescription:string
     headOfDepartmentId: number
+    headOfDepartment: Employee
     employees: Employee[]
 }

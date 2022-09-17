@@ -1,0 +1,224 @@
+<h1>Employee Hierarchy</h1>
+<br>
+<!-- <div id="cardContainer">
+    <div id="card">
+        <p id="cardText">Chief executive<br>officer</p>
+    </div>
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+</div>
+
+<div id="lineContainer">
+    <div id="line1"></div>
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+    <div id="lines"></div>
+</div>
+
+<div id="levels">
+
+        <div id="card">
+            <p id="cardText">Head of<br>Department</p>
+        </div>
+
+
+        <div id="card">
+            <p id="cardText">Head of<br>Department</p>
+        </div>
+
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+    <div id="lines"></div>
+</div>
+
+<div id="lineContainer">
+    <div id="line2"></div>
+    <div id="line2"></div>
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+    <div id="lines"></div>
+    <div id="lines"></div>
+    <div id="lines"></div>
+</div>
+
+<div id="levels">
+    <div id="card">
+        <p id="cardText">Reporting Line<br>Manager</p>
+    </div>
+    <div id="card">
+        <p id="cardText">Reporting Line Manager</p>
+    </div>
+    <div id="card">
+        <p id="cardText">Reporting Line Manager</p>
+    </div>
+    <div id="card">
+        <p id="cardText">Reporting Line Manager</p>
+    </div>
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+    <div id="lines"></div>
+    <div id="lines"></div>
+    <div id="lines"></div>
+</div>
+
+<div id="lineContainer">
+    <div id="line3"></div>
+    <div id="line3"></div>
+    <div id="line3"></div>
+    <div id="line3"></div>
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+    <div id="lines"></div>
+    <div id="lines"></div>
+    <div id="lines"></div>
+    <div id="lines"></div>
+    <div id="lines"></div>
+    <div id="lines"></div>
+    <div id="lines"></div>
+</div>
+
+<div id="levels">
+    <div id="card">
+        <p id="cardText">Employee</p>
+    </div>
+    <div id="card">
+        <p id="cardText">Employee</p>
+    </div>
+    <div id="card">
+        <p id="cardText">Employee</p>
+    </div>
+    <div id="card">
+        <p id="cardText">Employee</p>
+    </div>
+    <div id="card">
+        <p id="cardText">Employee</p>
+    </div>
+    <div id="card">
+        <p id="cardText">Employee</p>
+    </div>
+    <div id="card">
+        <p id="cardText">Employee</p>
+    </div>
+    <div id="card">
+        <p id="cardText">Employee</p>
+    </div>
+</div>
+
+<br><br><br> -->
+
+<div (click)="CeoClicked()" id="cardContainer">
+    <div id="card">
+        <p id="cardText">CEO</p>
+    </div>
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+</div>
+
+<div *ngIf="ceoClick" id="empInfoDiv">
+    <div id="cardCol" *ngFor="let ceo of ceoList">
+        <div id="empCard">
+            <img src="https://www.gravatar.com/avatar/000000000000000000000?d=mp"><br>
+            {{ceo.name}} {{ceo.surname}}
+        </div>
+        
+    </div>
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+</div>
+
+<div (click)="CooClicked($event)" id="cardContainer">
+    <div id="card">
+        <p id="cardText">COO</p>
+    </div>
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+</div>
+<div *ngIf="cooClick" id="empInfoDiv">
+    <div id="cardCol" *ngFor="let coo of cooList">
+        <div id="empCard">
+            <img src="https://www.gravatar.com/avatar/000000000000000000000?d=mp"><br>
+        {{coo.name}} {{coo.surname}}
+        </div>
+        
+    </div>
+</div>
+<div id="lineContainer">
+    <div id="lines"></div>
+</div>
+
+<div (click)="HodClicked($event)" id="cardContainer">
+    <div id="card">
+        <p id="cardText">Head of Department</p>
+    </div>
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+</div>
+<div *ngIf="hodClick" id="empInfoDiv">
+    <div id="cardCol" *ngFor="let hod of hodList">
+        <div id="empCard">
+            <img src="https://www.gravatar.com/avatar/000000000000000000000?d=mp"><br>
+            {{hod.name}} {{hod.surname}}
+        </div>
+        
+    </div>
+</div>
+<div id="lineContainer">
+    <div id="lines"></div>
+</div>
+
+<div (click)="RlmClicked($event)" id="cardContainer">
+    <div id="card">
+        <p id="cardText">Reporting Line Manager</p>
+    </div>
+</div>
+
+<div id="lineContainer">
+    <div id="lines"></div>
+</div>
+<div *ngIf="rlmClick" id="empInfoDiv">
+    <div id="cardCol" *ngFor="let rlm of rlmList">
+        <div id="empCard">
+            <img src="https://www.gravatar.com/avatar/000000000000000000000?d=mp"><br>
+            {{rlm.name}} {{rlm.surname}}
+        </div>
+        
+    </div>
+</div>
+<div id="lineContainer">
+    <div id="lines"></div>
+</div>
+
+<div (click)="EmpClicked($event)" id="cardContainer">
+    <div id="card">
+        <p id="cardText">Employee</p>
+    </div>
+</div>
+<div *ngIf="empClick" id="empInfoDiv">
+    <div id="cardCol" *ngFor="let emp of empList">
+        <div id="empCard">
+            <img src="https://www.gravatar.com/avatar/000000000000000000000?d=mp"><br>
+             {{emp.name}} {{emp.surname}}
+        </div>
+        
+    </div>
+</div>

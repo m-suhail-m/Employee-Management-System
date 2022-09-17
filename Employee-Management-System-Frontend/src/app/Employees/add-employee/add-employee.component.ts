@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Employee } from 'src/app/Interfaces/employee';
 import { HttpService } from 'src/app/Services/http.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Department } from 'src/app/Interfaces/department';
+import { Position } from 'src/app/Interfaces/position';
 
 @Component({
   selector: 'app-add-employee',
@@ -15,27 +17,29 @@ export class AddEmployeeComponent implements OnInit {
 
   constructor(private httpClient:HttpClient, private httpService:HttpService, private fb:FormBuilder) { }
 
-  
+  reportingLineManagers:Employee[] =[]
+  departments: Department[] =[]
+  positions: Position[] =[]
+  selectedPosition! : Position
 
-  ngOnInit(): void {
-    this.GetEmployees().subscribe(res=>{
-      this.employees = res
-      console.log(this.employees)
-    },()=>{
-      this.httpService.FetchError()
-    })
-
-    this.today = Date.now()
+  GetReportingLineManagers():Observable<Employee[]>{
+    return this.httpClient.get<Employee[]>(this.httpService.httpLink + 'Employee/GetAllReportingLineManagers')
+  }
+  GetDepartments():Observable<Department[]>{
+    return this.httpClient.get<Department[]>(this.httpService.httpLink + 'Department/GetAllDepartments')
+  }
+  GetPositions():Observable<Position[]>{
+    return this.httpClient.get<Position[]>(this.httpService.httpLink + 'Position/GetAllPositions')
   }
 
- today = 0
+  
 
   employeeForm = this.fb.group({
     name:['', [Validators.required]],
     surname:['',[Validators.required]],
     birthDate:['',[Validators.required]],
     salary:[0,[Validators.required, Validators.min(1)]],
-    position:[0,[Validators.required, Validators.min(1)]],
+    position:[0,[Validators.required]],
     department:[0],
     reportingLineManagerId:[0]
   })
@@ -47,11 +51,78 @@ export class AddEmployeeComponent implements OnInit {
   get salary(){return this.employeeForm.get('salary')}
   get position(){return this.employeeForm.get('position')}
 
-  employees:Employee[] =[]
-
-  GetEmployees():Observable<Employee[]>{
-    return this.httpClient.get<Employee[]>(this.httpService.httpLink + 'Employee/GetAllEmployees')
+  HasDepartment():boolean{
+    let positionId:number = this.employeeForm.value.position
+    let position = this.positions.find(p=> p.positionId == positionId)
+   
+    if(position?.hasDepartment){
+      return true
+    }
+   else{
+    return false
+   }
   }
+
+  HasReportingLineManager(){
+    let positionId:number = this.employeeForm.value.position
+    let position = this.positions.find(p=> p.positionId == positionId)
+   
+    if(position?.hasReportingLineManager){
+      return true
+    }
+   else{
+    return false
+   }
+  }
+
+  // GetPosition(){
+  //   let positionId:number = this.employeeForm.value.position
+  //   let position = this.positions.find(p=> p.positionId == positionId)
+  //   this.selectedPosition = position!
+  //   console.log(this.selectedPosition)
+  // }
+  
+  // PositionSelected():boolean{
+  //   if(this.employeeForm.value.position == 0){
+  //     return false
+  //   }
+  //   else if(this.employeeForm.value.position == 1){
+  //     this.employeeForm.value.department = 0
+  //     this.employeeForm.value.reportingLineManagerId = 0
+  //     return false
+  //   }
+  //   else{
+  //     return true
+  //   }
+  // }
+  
+  // HasDepartment():boolean{
+  //   let index = this.employeeForm.value.position
+  
+  //   for(let i = 0; i < this.positions.length; i++){
+
+  //     if(this.positions[i].positionId== index){
+  //       if(this.positions[i].positionName == "CEO")
+  //       // this.employeeForm.value.department = 0
+  //       return false
+  //     }
+  //   }
+  //     if(index == 0){
+  //       return false
+  //     }
+  //     return true
+    
+  // }
+
+  // HasReportingLineManager():boolean{
+  //   let index = this.employeeForm.value.position
+  //   if(!this.HasDepartment()){
+  //     return false
+  //   }
+
+  //   else if()
+  //   return true
+  // }
   
   AddEmployee(){
    const employeeForm = this.employeeForm.value
@@ -70,6 +141,26 @@ export class AddEmployeeComponent implements OnInit {
     },isBad=>{
       alert("An error occurred while trying to add the employee")
     })
+  }
+
+
+  ngOnInit(): void {
+    this.GetReportingLineManagers().subscribe(res=>{
+      this.reportingLineManagers = res
+     
+    })
+
+    this.GetDepartments().subscribe(res=>{
+      this.departments = res
+     
+    })
+
+    this.GetPositions().subscribe(res=>{
+      this.positions = res
+     
+    })
+
+   
   }
 
 }

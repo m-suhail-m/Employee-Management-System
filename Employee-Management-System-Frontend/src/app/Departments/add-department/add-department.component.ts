@@ -25,7 +25,7 @@ export class AddDepartmentComponent implements OnInit {
     let department= {
       departmentName: departmentForm.departmentName,
       departmentDescription: departmentForm.departmentDescription,
-      headOfDepartmentId: departmentForm.headOfDepartmentId 
+      // headOfDepartmentId: departmentForm.headOfDepartmentId 
     }
     this.httpClient.post(this.httpService.httpLink + 'Department/AddDepartment', department).subscribe(isGood=>{
       alert("Department added successfully")
@@ -39,6 +39,6 @@ export class AddDepartmentComponent implements OnInit {
 
   get departmentName(){return this.departmentForm.get('departmentName')}
   get departmentDescription(){return this.departmentForm.get('departmentDescription')}
-  get headOfDepartmentId(){return this.departmentForm.get('headOfDepartmentId')}
+  // get headOfDepartmentId(){return this.departmentForm.get('headOfDepartmentId')}
 
 }

@@ -9,11 +9,11 @@
         <input type="text" name="description" formControlName="departmentDescription"><br>
         <div id="errorMessage" *ngIf="departmentDescription!.invalid && (departmentDescription!.dirty || departmentDescription!.touched)">A description is required</div>
     
-        <label for="hod">Head of Department</label><br>
+        <!-- <label for="hod">Head of Department</label><br>
         <select name="hod">
             <option selected disabled>Select a head of department</option>
             <option></option>
-        </select><br>
+        </select><br> -->
     
         <button type="submit" [disabled]="!departmentForm.valid">Add Department</button>
     </form>

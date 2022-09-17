@@ -1,0 +1,20 @@
+<h1>View Departments</h1>
+<div id ="main">
+    <table>
+        <tr>
+            <th>Department Name</th>
+            <th>Department Description</th>
+            <th>Head of Department</th>
+            <th></th>
+            <th></th>
+        </tr>
+        
+        <tr *ngFor="let department of departments">
+            <td>{{department.departmentName}}</td>
+            <td>{{department.departmentDescription}}</td>
+            <td>{{department.headOfDepartment}}</td>
+            <td><button id="update"></button></td>
+            <td><button id="delete" (click)="Delete(department.departmentId)"></button></td>
+        </tr>
+    </table>
+</div>

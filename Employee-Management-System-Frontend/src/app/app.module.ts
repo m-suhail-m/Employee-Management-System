@@ -7,6 +7,12 @@ import { AddEmployeeComponent } from './Employees/add-employee/add-employee.comp
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddPositionComponent } from './Positions/add-position/add-position.component';
 import { AddDepartmentComponent } from './Departments/add-department/add-department.component';
+import { ViewPositionsComponent } from './Positions/view-positions/view-positions.component';
+import { ViewDepartmentsComponent } from './Departments/view-departments/view-departments.component';
+import { ViewEmployeesComponent } from './Employees/view-employees/view-employees.component';
+import { UpdateEmployeeComponent } from './Employees/update-employee/update-employee.component';
+import { DatePipe } from '@angular/common';
+import { HierarchyComponent } from './hierarchy/hierarchy.component';
 
 
 @NgModule({
@@ -14,7 +20,12 @@ import { AddDepartmentComponent } from './Departments/add-department/add-departm
     AppComponent,
     AddEmployeeComponent,
     AddPositionComponent,
-    AddDepartmentComponent
+    AddDepartmentComponent,
+    ViewPositionsComponent,
+    ViewDepartmentsComponent,
+    ViewEmployeesComponent,
+    UpdateEmployeeComponent,
+    HierarchyComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +35,7 @@ import { AddDepartmentComponent } from './Departments/add-department/add-departm
     ReactiveFormsModule
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

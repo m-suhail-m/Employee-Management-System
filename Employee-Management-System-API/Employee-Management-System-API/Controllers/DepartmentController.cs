@@ -73,5 +73,32 @@ namespace Employee_Management_System_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
+
+        [HttpDelete("DeleteDepartment/{id}")]
+        public async Task<IActionResult> DeleteDepartment(int id)
+        {
+            Department department = await _repository.GetDepartmentById(id);
+            if (department == null) return NotFound();
+
+            try
+            {
+                _repository.Delete(department);
+            }
+            catch (Exception e)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
+            }
+
+            if (await _repository.SaveAllChangesAsync())
+            {
+                return NoContent();
+            }
+
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }

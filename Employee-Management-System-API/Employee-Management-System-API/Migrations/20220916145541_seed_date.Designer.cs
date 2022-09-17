@@ -4,14 +4,16 @@ using Employee_Management_System_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Employee_Management_System_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220916145541_seed_date")]
+    partial class seed_date
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,20 +47,6 @@ namespace Employee_Management_System_API.Migrations
                             DepartmentId = 1,
                             DepartmentDescription = "The department that deals with information and technology",
                             DepartmentName = "IT",
-                            HeadOfDepartmentId = 0
-                        },
-                        new
-                        {
-                            DepartmentId = 2,
-                            DepartmentDescription = "The department that deals with employees and payroll",
-                            DepartmentName = "HR",
-                            HeadOfDepartmentId = 0
-                        },
-                        new
-                        {
-                            DepartmentId = 3,
-                            DepartmentDescription = "The department that deals with finances",
-                            DepartmentName = "Accounting",
                             HeadOfDepartmentId = 0
                         });
                 });
@@ -103,176 +91,6 @@ namespace Employee_Management_System_API.Migrations
                     b.HasIndex("ReportingLineManagerId");
 
                     b.ToTable("Employees");
-
-                    b.HasData(
-                        new
-                        {
-                            EmployeeId = 1,
-                            BirthDate = new DateTime(1982, 9, 17, 10, 38, 37, 604, DateTimeKind.Local).AddTicks(427),
-                            EmployeeNumber = "0001198801",
-                            Name = "Bob",
-                            PositionId = 1,
-                            Salary = 50000.0,
-                            Surname = "Gates"
-                        },
-                        new
-                        {
-                            EmployeeId = 2,
-                            BirthDate = new DateTime(1992, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4237),
-                            EmployeeNumber = "0002199801",
-                            Name = "Harriet",
-                            PositionId = 2,
-                            Salary = 20000.0,
-                            Surname = "Crane"
-                        },
-                        new
-                        {
-                            EmployeeId = 3,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4269),
-                            EmployeeNumber = "0003200001",
-                            Name = "Jonathan",
-                            PositionId = 2,
-                            Salary = 20000.0,
-                            Surname = "Nate"
-                        },
-                        new
-                        {
-                            EmployeeId = 4,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4284),
-                            DepartmentId = 1,
-                            EmployeeNumber = "0004200005",
-                            Name = "Bill",
-                            PositionId = 3,
-                            Salary = 15000.0,
-                            Surname = "Shane"
-                        },
-                        new
-                        {
-                            EmployeeId = 5,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4493),
-                            DepartmentId = 2,
-                            EmployeeNumber = "0005200005",
-                            Name = "Charel",
-                            PositionId = 3,
-                            Salary = 15000.0,
-                            Surname = "Heinz"
-                        },
-                        new
-                        {
-                            EmployeeId = 6,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4510),
-                            DepartmentId = 3,
-                            EmployeeNumber = "0006200005",
-                            Name = "Calvin",
-                            PositionId = 3,
-                            Salary = 15000.0,
-                            Surname = "Kane"
-                        },
-                        new
-                        {
-                            EmployeeId = 7,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4522),
-                            DepartmentId = 1,
-                            EmployeeNumber = "0007200002",
-                            Name = "Matt",
-                            PositionId = 4,
-                            Salary = 10000.0,
-                            Surname = "Flake"
-                        },
-                        new
-                        {
-                            EmployeeId = 8,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4534),
-                            DepartmentId = 2,
-                            EmployeeNumber = "0008200002",
-                            Name = "Blake",
-                            PositionId = 4,
-                            Salary = 10000.0,
-                            Surname = "Flake"
-                        },
-                        new
-                        {
-                            EmployeeId = 9,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4546),
-                            DepartmentId = 3,
-                            EmployeeNumber = "0009200003",
-                            Name = "Candice",
-                            PositionId = 4,
-                            Salary = 10000.0,
-                            Surname = "Catnipp"
-                        },
-                        new
-                        {
-                            EmployeeId = 10,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4559),
-                            DepartmentId = 1,
-                            EmployeeNumber = "0010200003",
-                            Name = "Ben",
-                            PositionId = 5,
-                            ReportingLineManagerId = 7,
-                            Salary = 8000.0,
-                            Surname = "Brown"
-                        },
-                        new
-                        {
-                            EmployeeId = 11,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4737),
-                            DepartmentId = 1,
-                            EmployeeNumber = "0011200003",
-                            Name = "Percival",
-                            PositionId = 5,
-                            ReportingLineManagerId = 7,
-                            Salary = 8000.0,
-                            Surname = "Purple"
-                        },
-                        new
-                        {
-                            EmployeeId = 12,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4750),
-                            DepartmentId = 2,
-                            EmployeeNumber = "0012200003",
-                            Name = "Yvonne",
-                            PositionId = 6,
-                            ReportingLineManagerId = 8,
-                            Salary = 8000.0,
-                            Surname = "Yellow"
-                        },
-                        new
-                        {
-                            EmployeeId = 13,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4762),
-                            DepartmentId = 2,
-                            EmployeeNumber = "0013200003",
-                            Name = "Greg",
-                            PositionId = 6,
-                            ReportingLineManagerId = 8,
-                            Salary = 8000.0,
-                            Surname = "Green"
-                        },
-                        new
-                        {
-                            EmployeeId = 14,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4774),
-                            DepartmentId = 3,
-                            EmployeeNumber = "0014200003",
-                            Name = "Veronica",
-                            PositionId = 7,
-                            ReportingLineManagerId = 9,
-                            Salary = 8000.0,
-                            Surname = "Vermillion"
-                        },
-                        new
-                        {
-                            EmployeeId = 15,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4785),
-                            DepartmentId = 3,
-                            EmployeeNumber = "0015200003",
-                            Name = "Philip",
-                            PositionId = 7,
-                            ReportingLineManagerId = 9,
-                            Salary = 8000.0,
-                            Surname = "Fuschia"
-                        });
                 });
 
             modelBuilder.Entity("Employee_Management_System_API.Models.Entities.Position", b =>
@@ -338,22 +156,6 @@ namespace Employee_Management_System_API.Migrations
                             HasReportingLineManager = true,
                             PositionDescription = "A person who develops frontend applications",
                             PositionName = "Frontend Developer"
-                        },
-                        new
-                        {
-                            PositionId = 6,
-                            HasDepartment = true,
-                            HasReportingLineManager = true,
-                            PositionDescription = "A person who deals with employees",
-                            PositionName = "HR Officer"
-                        },
-                        new
-                        {
-                            PositionId = 7,
-                            HasDepartment = true,
-                            HasReportingLineManager = true,
-                            PositionDescription = "A person who crunches numbers",
-                            PositionName = "Accountant"
                         });
                 });
 

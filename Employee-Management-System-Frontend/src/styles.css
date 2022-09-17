@@ -11,7 +11,7 @@
     justify-content: center;
     /* position: relative; */
     display: flex;
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
 }
 
 input{
@@ -30,7 +30,7 @@ input:focus{
 button{
     border-radius: 5px;
     border-color: aliceblue;
-    color: rgb(231, 231, 231);
+
 }
 
 button:valid{
@@ -45,4 +45,159 @@ button:disabled{
     background-color: rgb(31, 143, 255);
     /* border-color: rgb(0, 185, 247); */
     
+}
+
+table, td,th{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td{
+   padding-right: 15px;
+}
+
+th{
+    text-align: center;
+    padding:10px;
+    background-color:cornflowerblue;
+    color:rgb(249, 249, 249);
+    font-size: large;
+}
+
+td,th{
+    padding-left: 5px;
+}
+
+tr:hover{
+    /* background-color:rgb(198, 236, 255); */
+    background-color: rgb(191, 213, 255);
+}
+
+#update, #delete{
+    background-color: rgba(240, 248, 255, 0);
+    border: none;
+    height: 24px;
+    width:24px;
+   
+}
+
+#update{
+    background-image: url("src/assets/images/edit-svgrepo-com.svg");
+}
+
+#delete{
+    background-image: url("src/assets/images/delete-24.png");
+}
+
+#cardContainer{
+    display: flex;
+    justify-content: center;
+
+}
+
+#card{
+    width: 160px;
+    height: 70px;
+    /* width:224.63px; */
+    /* height:139.2px; */
+    /* height:120px; */
+    background-color:burlywood;
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#cardText{
+    text-align: center;
+    /* margin-top: 22px; */
+    font-size:x-large;
+    
+}
+
+#levels{
+    display: flex;
+    justify-content: space-around;
+}
+
+#lineContainer{
+    display: flex;
+    justify-content: space-around;
+}
+
+#lines{
+    background-color: black;
+    width: 2px;
+    height: 20px;
+}
+
+#line1{
+    background-color: black;
+    height: 2px;
+    width:762px;
+}
+
+#line2{
+    background-color: black;
+    height: 2px;
+    width:382px;
+}
+
+#line3{
+    background-color: black;
+    height: 2px;
+    width:192px;
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+   overflow: hidden;
+   background-color:cornflowerblue;
+   margin: 0;
+    height: 50px;
+} 
+
+.nav p{
+    float: left;
+    padding: 14px 16px;
+    color: aliceblue;
+    font-size: large;
+    cursor: pointer;
+}
+
+.nav p:hover{
+    color: rgb(177, 198, 238);
+}
+
+h1{
+    text-align: center;
+}
+
+#empInfoDiv{
+    /* display: flex;
+    justify-content: space-around; */
+    margin: 0 -5px;
+    box-sizing: border-box;
+}
+
+#empInfoDiv:after{
+    content: "";
+  display: table;
+  clear: both;
+}
+
+#cardCol{
+    float:left;
+    width: 20%;
+    padding: 0 10px;
+}
+
+#empCard{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
 }

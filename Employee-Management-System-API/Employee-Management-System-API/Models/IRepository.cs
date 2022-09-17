@@ -18,11 +18,15 @@ namespace Employee_Management_System_API.Models
         Task<Employee[]> SearchEmployeesByStringFieldsAsync(string query);
         Task<Employee> GetEmployeeByIdAsync(int id);
         string GenerateEmployeeNumber(int id, DateTime birthdate);
+        Task<Employee> GetReportingLineManager(int id);
+        Task<Employee[]> GetAllReportingLineManagersAsync();
 
         //Position
         Task<Position[]> GetAllPositionsAsync();
+        Task<Position> GetPositionById(int id);
 
         //Department
         Task<Department[]> GetAllDepartmentsAsync();
+        Task<Department> GetDepartmentById(int id);
     }
 }

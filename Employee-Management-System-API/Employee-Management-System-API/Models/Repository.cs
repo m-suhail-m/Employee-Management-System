@@ -35,17 +35,17 @@ namespace Employee_Management_System_API.Models
         //Employee
         public async Task<Employee[]> GetAllEmployeesAsync()
         {
-            IQueryable<Employee> employees = _appDbContext.Employees.Include(x=>x.Department).Include(x=>x.Department).Include(x=>x.Position).Include(x=>x.Position);
+            IQueryable<Employee> employees = _appDbContext.Employees.Include(x=>x.Department).Include(x=>x.Position);
             return await employees.ToArrayAsync();
         }
         public async Task<Employee[]> SearchEmployeesByStringFieldsAsync(string query)
         {
-            IQueryable<Employee> employees = _appDbContext.Employees.Where(x=> x.Name.Contains(query) || x.Surname.Contains(query)).Include(x => x.Department.DepartmentId).Include(x => x.Department.DepartmentName).Include(x => x.Position.PositionId).Include(x => x.Position.PositionName);
+            IQueryable<Employee> employees = _appDbContext.Employees.Where(x=> x.Name.Contains(query) || x.Surname.Contains(query) || x.Department.DepartmentName.Contains(query) || x.Position.PositionName.Contains(query) || x.ReportingLineManager.Name.Contains(query) || x.EmployeeNumber.Contains(query)  ).Include(x => x.Department).Include(x => x.Position).Include(x=>x.ReportingLineManager);
             return await employees.ToArrayAsync();
         }
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
-            IQueryable<Employee> employee = _appDbContext.Employees.Where(x => x.EmployeeId == id).Include(x => x.Department.DepartmentId).Include(x => x.Department.DepartmentName).Include(x => x.Position.PositionId).Include(x => x.Position.PositionName);
+            IQueryable<Employee> employee = _appDbContext.Employees.Where(x => x.EmployeeId == id).Include(x => x.Department).Include(x => x.Position);
             return await employee.FirstOrDefaultAsync();
         }
 
@@ -76,18 +76,39 @@ namespace Employee_Management_System_API.Models
             return  idNumber;
         }
 
+        public async Task<Employee> GetReportingLineManager(int id)
+        {
+            IQueryable<Employee> manager = _appDbContext.Employees.Where(e => e.EmployeeId == id);
+            return await manager.FirstOrDefaultAsync();
+        }
+        public async Task<Employee[]> GetAllReportingLineManagersAsync()
+        {
+            IQueryable<Employee> manager = _appDbContext.Employees.Where(e => e.Position.PositionName == "Reporting Line Manager");
+            return await manager.ToArrayAsync();
+        }
+
         //Position
         public async Task<Position[]> GetAllPositionsAsync()
         {
             IQueryable<Position> positions = _appDbContext.Positions;
             return await positions.ToArrayAsync();
         }
+        public async Task<Position> GetPositionById(int id)
+        {
+            IQueryable<Position> positions = _appDbContext.Positions.Where(x=>x.PositionId ==id);
+            return await positions.FirstOrDefaultAsync();
+        }
 
         //Department
         public async Task<Department[]> GetAllDepartmentsAsync()
         {
-            IQueryable<Department> departments = _appDbContext.Departments;
+            IQueryable<Department> departments = _appDbContext.Departments.Include(e=>e.Employees);
             return await departments.ToArrayAsync();
+        }
+        public async Task<Department> GetDepartmentById(int id)
+        {
+            IQueryable<Department> department = _appDbContext.Departments.Where(x => x.DepartmentId == id);
+            return await department.FirstOrDefaultAsync();
         }
 
     }
