@@ -1,10 +1,26 @@
 <h1>View Departments</h1>
+
+<div id="main">
+    <input #searchBar type="text" id="searchBar" placeholder="Search..."><br>
+    
+    
+</div>
+<div id="main">
+    <button id ="searchButton" (click)="Search(searchBar.value)">Search</button>
+    <button id="addButton" [routerLink]="'/add-department'" >Add Department</button>
+</div>
+
+<br>
+
+
 <div id ="main">
+
+   
     <table>
         <tr>
             <th>Department Name</th>
             <th>Department Description</th>
-            <th>Head of Department</th>
+            <!-- <th>Head of Department</th> -->
             <th></th>
             <th></th>
         </tr>
@@ -12,8 +28,8 @@
         <tr *ngFor="let department of departments">
             <td>{{department.departmentName}}</td>
             <td>{{department.departmentDescription}}</td>
-            <td>{{department.headOfDepartment}}</td>
-            <td><button id="update"></button></td>
+            <!-- <td>{{department.headOfDepartment}}</td> -->
+            <td><button id="update" [routerLink]="['/update-department', department.departmentId]"></button></td>
             <td><button id="delete" (click)="Delete(department.departmentId)"></button></td>
         </tr>
     </table>

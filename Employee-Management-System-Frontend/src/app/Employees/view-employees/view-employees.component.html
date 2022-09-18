@@ -1,7 +1,15 @@
 <h1>View Employees</h1>
-<input #searchBar type="text" id="searchBar" placeholder="Search..."><br>
-<button id ="searchButton" (click)="Search(searchBar.value)">Search</button>
+
+<div id="main">
+    <input #searchBar type="text" id="searchBar" placeholder="Search..."><br>
+</div>
+<div id="main">
+    <button id ="searchButton" (click)="Search(searchBar.value)">Search</button>
 <button id="addButton" [routerLink]="'/add-employee'" >Add Employee</button>
+</div>
+
+<br>
+
 <div id ="main">
 
     

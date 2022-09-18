@@ -67,7 +67,9 @@ namespace Employee_Management_System_API.Migrations
                     PositionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PositionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PositionDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PositionDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HasReportingLineManager = table.Column<bool>(type: "bit", nullable: false),
+                    HasDepartment = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -191,7 +193,7 @@ namespace Employee_Management_System_API.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Salary = table.Column<double>(type: "float", nullable: false),
-                    PositionId = table.Column<int>(type: "int", nullable: false),
+                    PositionId = table.Column<int>(type: "int", nullable: true),
                     DepartmentId = table.Column<int>(type: "int", nullable: true),
                     ReportingLineManagerId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -216,6 +218,59 @@ namespace Employee_Management_System_API.Migrations
                         principalTable: "Positions",
                         principalColumn: "PositionId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Departments",
+                columns: new[] { "DepartmentId", "DepartmentDescription", "DepartmentName" },
+                values: new object[,]
+                {
+                    { 1, "The department that deals with information and technology", "IT" },
+                    { 2, "The department that deals with employees and payroll", "HR" },
+                    { 3, "The department that deals with finances", "Accounting" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Positions",
+                columns: new[] { "PositionId", "HasDepartment", "HasReportingLineManager", "PositionDescription", "PositionName" },
+                values: new object[,]
+                {
+                    { 1, false, false, "The person responsible for managing the entire organisation", "CEO" },
+                    { 2, false, false, "The person responsible for the day to day operation of the organisation", "COO" },
+                    { 3, true, false, "The person in charge of a particular department", "Head of Department" },
+                    { 4, true, false, "The person in charge of a particular group of employees within a department", "Reporting Line Manager" },
+                    { 5, true, true, "A person who develops frontend applications", "Frontend Developer" },
+                    { 6, true, true, "A person who deals with employees", "HR Officer" },
+                    { 7, true, true, "A person who crunches numbers", "Accountant" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeId", "BirthDate", "DepartmentId", "EmployeeNumber", "Name", "PositionId", "ReportingLineManagerId", "Salary", "Surname" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(1982, 9, 18, 19, 29, 0, 752, DateTimeKind.Local).AddTicks(7562), null, "0001198801", "Bob", 1, null, 50000.0, "Gates" },
+                    { 2, new DateTime(1992, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5019), null, "0002199801", "Harriet", 2, null, 20000.0, "Crane" },
+                    { 3, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5052), null, "0003200001", "Jonathan", 2, null, 20000.0, "Nate" },
+                    { 4, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5066), 1, "0004200005", "Bill", 3, null, 15000.0, "Shane" },
+                    { 5, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5271), 2, "0005200005", "Charel", 3, null, 15000.0, "Heinz" },
+                    { 6, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5288), 3, "0006200005", "Calvin", 3, null, 15000.0, "Kane" },
+                    { 7, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5299), 1, "0007200002", "Matt", 4, null, 10000.0, "Flake" },
+                    { 8, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5311), 2, "0008200002", "Blake", 4, null, 10000.0, "Flake" },
+                    { 9, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5322), 3, "0009200003", "Candice", 4, null, 10000.0, "Catnipp" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeId", "BirthDate", "DepartmentId", "EmployeeNumber", "Name", "PositionId", "ReportingLineManagerId", "Salary", "Surname" },
+                values: new object[,]
+                {
+                    { 10, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5334), 1, "0010200003", "Ben", 5, 7, 8000.0, "Brown" },
+                    { 11, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5514), 1, "0011200003", "Percival", 5, 7, 8000.0, "Purple" },
+                    { 12, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5527), 2, "0012200003", "Yvonne", 6, 8, 8000.0, "Yellow" },
+                    { 13, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5538), 2, "0013200003", "Greg", 6, 8, 8000.0, "Green" },
+                    { 14, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5549), 3, "0014200003", "Veronica", 7, 9, 8000.0, "Vermillion" },
+                    { 15, new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5591), 3, "0015200003", "Philip", 7, 9, 8000.0, "Fuschia" }
                 });
 
             migrationBuilder.CreateIndex(

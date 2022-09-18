@@ -24,9 +24,11 @@ namespace Employee_Management_System_API.Models
         //Position
         Task<Position[]> GetAllPositionsAsync();
         Task<Position> GetPositionById(int id);
+        Task<Position[]> GetPositionByName(string query);
 
         //Department
         Task<Department[]> GetAllDepartmentsAsync();
         Task<Department> GetDepartmentById(int id);
+        Task<Department[]> GetDepartmentByName(string query);
     }
 }

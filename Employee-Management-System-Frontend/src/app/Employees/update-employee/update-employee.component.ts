@@ -80,6 +80,15 @@ export class UpdateEmployeeComponent implements OnInit {
     })
   }
 
+  Cancel(){
+    if(confirm('Cancel and go back?')){
+      this.router.navigate(['view-employees']).then(()=>{location.reload()})
+    }
+    else{
+      location.reload()
+    }
+  }
+
   ngOnInit(): void {
     this.GetReportingLineManagers().subscribe(res=>{
       this.reportingLineManagers = res

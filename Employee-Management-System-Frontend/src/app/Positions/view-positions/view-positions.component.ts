@@ -27,7 +27,11 @@ export class ViewPositionsComponent implements OnInit {
   }
 
   Search(query:string){
-
+    this.httpClient.get<Position[]>(this.httpService.httpLink + 'Position/SearchPositionsByQuery/' + query).subscribe(res=>{
+      this.positions = res
+    },()=>{
+      alert("No results found")
+    })
   }
 
   Delete(id:number){

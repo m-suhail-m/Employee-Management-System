@@ -15,8 +15,8 @@ export class AddDepartmentComponent implements OnInit {
 
   departmentForm= this.fb.group({
     departmentName:['', Validators.required],
-    departmentDescription:['', Validators.required],
-    headOfDepartmentId:[0]
+    departmentDescription:['', Validators.required]
+   
   })
 
   AddDepartment(){
@@ -32,6 +32,10 @@ export class AddDepartmentComponent implements OnInit {
     },()=>{
       alert("An error occurred while trying to add the department")
     })
+  }
+
+  Cancel(){
+    location.reload()
   }
 
   ngOnInit(): void {

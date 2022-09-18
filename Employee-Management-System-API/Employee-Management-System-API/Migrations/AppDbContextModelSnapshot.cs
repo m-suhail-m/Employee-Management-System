@@ -32,9 +32,6 @@ namespace Employee_Management_System_API.Migrations
                     b.Property<string>("DepartmentName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HeadOfDepartmentId")
-                        .HasColumnType("int");
-
                     b.HasKey("DepartmentId");
 
                     b.ToTable("Departments");
@@ -44,22 +41,19 @@ namespace Employee_Management_System_API.Migrations
                         {
                             DepartmentId = 1,
                             DepartmentDescription = "The department that deals with information and technology",
-                            DepartmentName = "IT",
-                            HeadOfDepartmentId = 0
+                            DepartmentName = "IT"
                         },
                         new
                         {
                             DepartmentId = 2,
                             DepartmentDescription = "The department that deals with employees and payroll",
-                            DepartmentName = "HR",
-                            HeadOfDepartmentId = 0
+                            DepartmentName = "HR"
                         },
                         new
                         {
                             DepartmentId = 3,
                             DepartmentDescription = "The department that deals with finances",
-                            DepartmentName = "Accounting",
-                            HeadOfDepartmentId = 0
+                            DepartmentName = "Accounting"
                         });
                 });
 
@@ -108,7 +102,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 1,
-                            BirthDate = new DateTime(1982, 9, 17, 10, 38, 37, 604, DateTimeKind.Local).AddTicks(427),
+                            BirthDate = new DateTime(1982, 9, 18, 19, 29, 0, 752, DateTimeKind.Local).AddTicks(7562),
                             EmployeeNumber = "0001198801",
                             Name = "Bob",
                             PositionId = 1,
@@ -118,7 +112,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 2,
-                            BirthDate = new DateTime(1992, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4237),
+                            BirthDate = new DateTime(1992, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5019),
                             EmployeeNumber = "0002199801",
                             Name = "Harriet",
                             PositionId = 2,
@@ -128,7 +122,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 3,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4269),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5052),
                             EmployeeNumber = "0003200001",
                             Name = "Jonathan",
                             PositionId = 2,
@@ -138,7 +132,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 4,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4284),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5066),
                             DepartmentId = 1,
                             EmployeeNumber = "0004200005",
                             Name = "Bill",
@@ -149,7 +143,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 5,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4493),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5271),
                             DepartmentId = 2,
                             EmployeeNumber = "0005200005",
                             Name = "Charel",
@@ -160,7 +154,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 6,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4510),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5288),
                             DepartmentId = 3,
                             EmployeeNumber = "0006200005",
                             Name = "Calvin",
@@ -171,7 +165,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 7,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4522),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5299),
                             DepartmentId = 1,
                             EmployeeNumber = "0007200002",
                             Name = "Matt",
@@ -182,7 +176,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 8,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4534),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5311),
                             DepartmentId = 2,
                             EmployeeNumber = "0008200002",
                             Name = "Blake",
@@ -193,7 +187,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 9,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4546),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5322),
                             DepartmentId = 3,
                             EmployeeNumber = "0009200003",
                             Name = "Candice",
@@ -204,7 +198,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 10,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4559),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5334),
                             DepartmentId = 1,
                             EmployeeNumber = "0010200003",
                             Name = "Ben",
@@ -216,7 +210,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 11,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4737),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5514),
                             DepartmentId = 1,
                             EmployeeNumber = "0011200003",
                             Name = "Percival",
@@ -228,7 +222,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 12,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4750),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5527),
                             DepartmentId = 2,
                             EmployeeNumber = "0012200003",
                             Name = "Yvonne",
@@ -240,7 +234,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 13,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4762),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5538),
                             DepartmentId = 2,
                             EmployeeNumber = "0013200003",
                             Name = "Greg",
@@ -252,7 +246,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 14,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4774),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5549),
                             DepartmentId = 3,
                             EmployeeNumber = "0014200003",
                             Name = "Veronica",
@@ -264,7 +258,7 @@ namespace Employee_Management_System_API.Migrations
                         new
                         {
                             EmployeeId = 15,
-                            BirthDate = new DateTime(1994, 9, 17, 10, 38, 37, 605, DateTimeKind.Local).AddTicks(4785),
+                            BirthDate = new DateTime(1994, 9, 18, 19, 29, 0, 753, DateTimeKind.Local).AddTicks(5591),
                             DepartmentId = 3,
                             EmployeeNumber = "0015200003",
                             Name = "Philip",

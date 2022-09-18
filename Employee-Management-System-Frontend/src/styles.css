@@ -4,6 +4,7 @@
 #errorMessage{
     color: red;
     font-size:smaller;
+    margin-bottom: 10px;
 }
 
 #main{
@@ -14,7 +15,7 @@
     /* background-color: antiquewhite; */
 }
 
-input{
+input, select{
     border-radius: 5px;
     border-width: 1px 1px 1px 1px;
     
@@ -33,7 +34,7 @@ button{
 
 }
 
-button:valid{
+button{
     cursor: pointer;
 }
 
@@ -42,9 +43,18 @@ button:disabled{
 }
 
 #buttonAdd{
-    background-color: rgb(31, 143, 255);
+    background-color: cornflowerblue;
+    color: aliceblue;
+    border-color: black;
     /* border-color: rgb(0, 185, 247); */
+    margin-left:10px;
     
+}
+
+#cancelButton{
+    background-color: rgb(237, 100, 100);
+    color: aliceblue;
+    border-color: black;
 }
 
 table, td,th{
@@ -200,4 +210,13 @@ h1{
     padding: 16px;
     text-align: center;
     background-color: #f1f1f1;
+}
+
+#formDiv{
+    display: flex;
+    justify-content: center;
+    border: solid 1px black;
+    padding: 20px 40px;
+    background-color:rgb(238, 238, 238);
+
 }

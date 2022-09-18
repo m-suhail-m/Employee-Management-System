@@ -20,10 +20,12 @@ export class AddPositionComponent implements OnInit {
   positionForm = this.fb.group({
     positionName:['', Validators.required],
     positionDescription:['', Validators.required]
-    //,
-    // hasDepartment:['', Validators.required],
-    // hasReportingLineManager:['', Validators.required]
+   
   })
+
+  Cancel(){
+    location.reload()
+  }
 
   AddPosition(){
     const positionForm = this.positionForm.value

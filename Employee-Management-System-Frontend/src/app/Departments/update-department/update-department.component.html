@@ -1,7 +1,7 @@
-<h1>Add New Department</h1>
+<h1>Update Department</h1>
 <div id="main">
     <div id="formDiv">
-        <form [formGroup]="departmentForm" (ngSubmit)="AddDepartment()">
+        <form [formGroup]="departmentForm" (ngSubmit)="UpdateDepartment()">
 
             <label for="name">Department Name</label><br>
             <input type="text" name="name" formControlName="departmentName"><br>
@@ -18,7 +18,7 @@
             </select><br> -->
             
             <button id="cancelButton" type="reset" (click)="Cancel()">Cancel</button>
-            <button id="buttonAdd" type="submit" [disabled]="!departmentForm.valid">Add Department</button>
+            <button id="buttonAdd" type="submit" [disabled]="!departmentForm.valid">Update Department</button>
         </form>
     </div>
   

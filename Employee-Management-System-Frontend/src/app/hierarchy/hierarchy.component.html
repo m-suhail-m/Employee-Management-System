@@ -130,7 +130,7 @@
 
 <div *ngIf="ceoClick" id="empInfoDiv">
     <div id="cardCol" *ngFor="let ceo of ceoList">
-        <div id="empCard">
+        <div [routerLink]="['/update-employee', ceo.employeeId]" id="empCard">
             <img src="https://www.gravatar.com/avatar/000000000000000000000?d=mp"><br>
             {{ceo.name}} {{ceo.surname}}
         </div>
@@ -153,7 +153,7 @@
 </div>
 <div *ngIf="cooClick" id="empInfoDiv">
     <div id="cardCol" *ngFor="let coo of cooList">
-        <div id="empCard">
+        <div [routerLink]="['/update-employee', coo.employeeId]" id="empCard">
             <img src="https://www.gravatar.com/avatar/000000000000000000000?d=mp"><br>
         {{coo.name}} {{coo.surname}}
         </div>
@@ -175,7 +175,7 @@
 </div>
 <div *ngIf="hodClick" id="empInfoDiv">
     <div id="cardCol" *ngFor="let hod of hodList">
-        <div id="empCard">
+        <div [routerLink]="['/update-employee', hod.employeeId]" id="empCard">
             <img src="https://www.gravatar.com/avatar/000000000000000000000?d=mp"><br>
             {{hod.name}} {{hod.surname}}
         </div>
@@ -197,7 +197,7 @@
 </div>
 <div *ngIf="rlmClick" id="empInfoDiv">
     <div id="cardCol" *ngFor="let rlm of rlmList">
-        <div id="empCard">
+        <div [routerLink]="['/update-employee', rlm.employeeId]" id="empCard">
             <img src="https://www.gravatar.com/avatar/000000000000000000000?d=mp"><br>
             {{rlm.name}} {{rlm.surname}}
         </div>
@@ -215,7 +215,7 @@
 </div>
 <div *ngIf="empClick" id="empInfoDiv">
     <div id="cardCol" *ngFor="let emp of empList">
-        <div id="empCard">
+        <div [routerLink]="['/update-employee', emp.employeeId]" id="empCard">
             <img src="https://www.gravatar.com/avatar/000000000000000000000?d=mp"><br>
              {{emp.name}} {{emp.surname}}
         </div>

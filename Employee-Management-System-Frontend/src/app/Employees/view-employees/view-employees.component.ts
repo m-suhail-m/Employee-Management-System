@@ -24,6 +24,7 @@ export class ViewEmployeesComponent implements OnInit {
     if(confirm("Are you sure you want to delete this employee?")){
       this.httpClient.delete(this.httpService.httpLink + 'Employee/DeleteEmployee/' + id).subscribe(()=>{
         alert("Employee deleted successfully")
+        location.reload()
       },()=>{
         alert("The employee was unable to be deleted")
       })

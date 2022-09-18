@@ -1,4 +1,15 @@
 <h1>View Positions</h1>
+<div id="main">
+    <input #searchBar type="text" id="searchBar" placeholder="Search..."><br>
+    
+    
+</div>
+<div id="main">
+    <button id ="searchButton" (click)="Search(searchBar.value)">Search</button>
+    <button id="addButton" [routerLink]="'/add-position'" >Add Position</button>
+</div>
+
+<br>
 <div id ="main">
     <table>
         <tr>
@@ -11,7 +22,7 @@
         <tr *ngFor="let position of positions">
             <td>{{position.positionName}}</td>
             <td>{{position.positionDescription}}</td>
-            <td><button id="update"></button></td>
+            <td><button id="update" [routerLink]="['/update-position', position.positionId]"></button></td>
             <td><button id="delete" (click)="Delete(position.positionId)"></button></td>
         </tr>
     </table>

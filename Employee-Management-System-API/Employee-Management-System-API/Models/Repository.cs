@@ -99,6 +99,12 @@ namespace Employee_Management_System_API.Models
             return await positions.FirstOrDefaultAsync();
         }
 
+        public async Task<Position[]> GetPositionByName(string query)
+        {
+            IQueryable<Position> positions = _appDbContext.Positions.Where(p => p.PositionName.Contains(query));
+            return await positions.ToArrayAsync();
+        }
+
         //Department
         public async Task<Department[]> GetAllDepartmentsAsync()
         {
@@ -109,6 +115,11 @@ namespace Employee_Management_System_API.Models
         {
             IQueryable<Department> department = _appDbContext.Departments.Where(x => x.DepartmentId == id);
             return await department.FirstOrDefaultAsync();
+        }
+        public async Task<Department[]> GetDepartmentByName(string query)
+        {
+            IQueryable<Department> departments = _appDbContext.Departments.Where(p => p.DepartmentName.Contains(query));
+            return await departments.ToArrayAsync();
         }
 
     }

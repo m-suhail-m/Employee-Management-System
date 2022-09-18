@@ -24,10 +24,19 @@ export class ViewDepartmentsComponent implements OnInit {
     if(confirm("Are you sure you want to delete this department?")){
       this.httpClient.delete(this.httpService.httpLink + 'Department/DeleteDepartment/' + id).subscribe(()=>{
         alert("Department deleted successfully")
+        location.reload()
       },()=>{
         alert("The department was unable to be deleted")
       })
     }
+  }
+
+  Search(query:string){
+    this.httpClient.get<Department[]>(this.httpService.httpLink + 'Department/SearchDepartmentsByQuery/' + query).subscribe(res=>{
+      this.departments = res
+    },()=>{
+      alert("No results found")
+    })
   }
 
   ngOnInit(): void {

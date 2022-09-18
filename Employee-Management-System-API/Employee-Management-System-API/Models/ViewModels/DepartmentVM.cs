@@ -9,6 +9,6 @@ namespace Employee_Management_System_API.Models.ViewModels
     {
         public string DepartmentName { get; set; }
         public string DepartmentDescription { get; set; }
-        public int HeadOfDepartmentId { get; set; }
+        //public int HeadOfDepartmentId { get; set; }
     }
 }

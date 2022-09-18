@@ -70,6 +70,48 @@ namespace Employee_Management_System_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("SearchPositionById/{id}")]
+        public async Task<IActionResult> SearchPositionById(int id)
+        {
+            Position position = await _repository.GetPositionById(id);
+            if (position == null) return NotFound();
+            return Ok(position);
+        }
+
+        [HttpGet("SearchPositionsByQuery/{query}")]
+        public async Task<IActionResult> SearchPositionsByQuery(string query)
+        {
+            Position[] positions = await _repository.GetPositionByName(query);
+            return Ok(positions);
+        }
+
+        [HttpPut]
+        [Route("UpdatePosition/{id}")]
+        public async Task<IActionResult> UpdatePosition(int id, PositionVM positionVm)
+        {
+            Position currentPosition = await _repository.GetPositionById(id);
+            if (currentPosition == null) return NotFound();
+
+            currentPosition.PositionName = positionVm.PositionName;
+            currentPosition.PositionDescription = positionVm.PositionDescription;
+
+            try
+            {
+                if (! await _repository.SaveAllChangesAsync())
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+            }
+            catch (Exception e)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
+            }
+
+            return NoContent();
+        }
+
         [HttpDelete("DeletePosition/{id}")]
         public async Task<IActionResult> DeletePosition(int id)
         {

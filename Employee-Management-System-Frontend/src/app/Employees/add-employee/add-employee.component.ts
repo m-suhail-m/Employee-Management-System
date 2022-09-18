@@ -6,6 +6,7 @@ import { HttpService } from 'src/app/Services/http.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Department } from 'src/app/Interfaces/department';
 import { Position } from 'src/app/Interfaces/position';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-employee',
@@ -15,7 +16,7 @@ import { Position } from 'src/app/Interfaces/position';
 
 export class AddEmployeeComponent implements OnInit {
 
-  constructor(private httpClient:HttpClient, private httpService:HttpService, private fb:FormBuilder) { }
+  constructor(private httpClient:HttpClient, private httpService:HttpService, private fb:FormBuilder, private router:Router) { }
 
   reportingLineManagers:Employee[] =[]
   departments: Department[] =[]
@@ -74,55 +75,6 @@ export class AddEmployeeComponent implements OnInit {
     return false
    }
   }
-
-  // GetPosition(){
-  //   let positionId:number = this.employeeForm.value.position
-  //   let position = this.positions.find(p=> p.positionId == positionId)
-  //   this.selectedPosition = position!
-  //   console.log(this.selectedPosition)
-  // }
-  
-  // PositionSelected():boolean{
-  //   if(this.employeeForm.value.position == 0){
-  //     return false
-  //   }
-  //   else if(this.employeeForm.value.position == 1){
-  //     this.employeeForm.value.department = 0
-  //     this.employeeForm.value.reportingLineManagerId = 0
-  //     return false
-  //   }
-  //   else{
-  //     return true
-  //   }
-  // }
-  
-  // HasDepartment():boolean{
-  //   let index = this.employeeForm.value.position
-  
-  //   for(let i = 0; i < this.positions.length; i++){
-
-  //     if(this.positions[i].positionId== index){
-  //       if(this.positions[i].positionName == "CEO")
-  //       // this.employeeForm.value.department = 0
-  //       return false
-  //     }
-  //   }
-  //     if(index == 0){
-  //       return false
-  //     }
-  //     return true
-    
-  // }
-
-  // HasReportingLineManager():boolean{
-  //   let index = this.employeeForm.value.position
-  //   if(!this.HasDepartment()){
-  //     return false
-  //   }
-
-  //   else if()
-  //   return true
-  // }
   
   AddEmployee(){
    const employeeForm = this.employeeForm.value
@@ -137,12 +89,20 @@ export class AddEmployeeComponent implements OnInit {
     }
 
     this.httpClient.post(this.httpService.httpLink + 'Employee/AddEmployee', employee).subscribe(isGood=>{
-      alert("Employee Added Successfully")
+      if(confirm("Employee Added Successfully. Go to view employee?")){
+        this.router.navigate(['view-employees'])
+      }
+      else{
+        location.reload()
+      }
     },isBad=>{
       alert("An error occurred while trying to add the employee")
     })
   }
 
+  Cancel(){
+    location.reload()
+  }
 
   ngOnInit(): void {
     this.GetReportingLineManagers().subscribe(res=>{

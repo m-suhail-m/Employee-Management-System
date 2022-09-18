@@ -49,10 +49,10 @@ namespace Employee_Management_System_API.Controllers
               //HeadOfDepartmentId = departmentVM.HeadOfDepartmentId
             };
 
-            if(departmentVM.HeadOfDepartmentId != 0)
-            {
-                department.HeadOfDepartmentId = departmentVM.HeadOfDepartmentId;
-            }
+            //if(departmentVM.HeadOfDepartmentId != 0)
+            //{
+            //    department.HeadOfDepartmentId = departmentVM.HeadOfDepartmentId;
+            //}
 
             try
             {
@@ -73,6 +73,49 @@ namespace Employee_Management_System_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
         }
+
+        [HttpGet]
+        [Route("SearchDepartmentById/{id}")]
+        public async Task<IActionResult> SearchDepartmentById(int id)
+        {
+            Department department = await _repository.GetDepartmentById(id);
+            if (department == null) return NotFound();
+            return Ok(department);
+        }
+
+        [HttpGet("SearchDepartmentsByQuery/{query}")]
+        public async Task<IActionResult> SearchDepartmentsByQuery(string query)
+        {
+            Department[] departments = await _repository.GetDepartmentByName(query);
+            return Ok(departments);
+        }
+
+        [HttpPut]
+        [Route("UpdateDepartment/{id}")]
+        public async Task<IActionResult> UpdateDepartment(int id, DepartmentVM departmentVM)
+        {
+            Department currentDepartment = await _repository.GetDepartmentById(id);
+            if (currentDepartment == null) return NotFound();
+
+            currentDepartment.DepartmentName = departmentVM.DepartmentName;
+            currentDepartment.DepartmentDescription = departmentVM.DepartmentDescription;
+
+            try
+            {
+                if (!await _repository.SaveAllChangesAsync())
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+            }
+            catch (Exception e)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
+            }
+
+            return NoContent();
+        }
+
 
         [HttpDelete("DeleteDepartment/{id}")]
         public async Task<IActionResult> DeleteDepartment(int id)

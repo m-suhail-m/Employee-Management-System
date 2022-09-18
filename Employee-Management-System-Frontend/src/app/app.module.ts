@@ -13,7 +13,8 @@ import { ViewEmployeesComponent } from './Employees/view-employees/view-employee
 import { UpdateEmployeeComponent } from './Employees/update-employee/update-employee.component';
 import { DatePipe } from '@angular/common';
 import { HierarchyComponent } from './hierarchy/hierarchy.component';
-
+import { UpdateDepartmentComponent } from './Departments/update-department/update-department.component';
+import { UpdatePositionComponent } from './Positions/update-position/update-position.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { HierarchyComponent } from './hierarchy/hierarchy.component';
     ViewDepartmentsComponent,
     ViewEmployeesComponent,
     UpdateEmployeeComponent,
-    HierarchyComponent
+    HierarchyComponent,
+    UpdateDepartmentComponent,
+    UpdatePositionComponent
   ],
   imports: [
     BrowserModule,
